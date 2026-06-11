@@ -1,4 +1,4 @@
-from task_manager.validation import (
+from validation import (
     validate_task_title,
     validate_task_description,
     validate_due_date
@@ -28,11 +28,14 @@ def mark_task_as_complete(index, tasks=tasks):
     try:
         index = int(index)
     except ValueError:
+        print("Invalid task index")
         return
 
     if 0 <= index < len(tasks):
         tasks[index]["completed"] = True
         print("Task marked as complete!")
+    else:
+        print("Invalid task index")
 
 
 def view_pending_tasks(tasks=tasks):
@@ -48,7 +51,6 @@ def view_pending_tasks(tasks=tasks):
 def calculate_progress(tasks=tasks):
 
     if len(tasks) == 0:
-        print("0.00%")
         return 0
 
     completed = 0
@@ -56,7 +58,4 @@ def calculate_progress(tasks=tasks):
         if task["completed"]:
             completed += 1
 
-    progress = (completed / len(tasks)) * 100
-
-    print(f"{progress:.2f}%")
-    return progress
+    return (completed / len(tasks)) * 100
