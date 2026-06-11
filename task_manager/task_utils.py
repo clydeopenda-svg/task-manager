@@ -13,14 +13,12 @@ def add_task(title, description, due_date):
     validate_task_description(description)
     validate_due_date(due_date)
 
-    task = {
+    tasks.append({
         "title": title,
         "description": description,
         "due_date": due_date,
         "completed": False
-    }
-
-    tasks.append(task)
+    })
 
     print("Task added successfully!")
 
@@ -30,30 +28,22 @@ def mark_task_as_complete(index, tasks=tasks):
     try:
         index = int(index)
     except ValueError:
-        raise ValueError("Invalid task index")
+        return
 
     if 0 <= index < len(tasks):
         tasks[index]["completed"] = True
         print("Task marked as complete!")
     else:
-        raise ValueError("Invalid task index")
+        return
 
 
 def view_pending_tasks(tasks=tasks):
 
-    pending_tasks = []
-
     for task in tasks:
         if not task["completed"]:
-            pending_tasks.append(task)
+            print(task)
 
-    if len(pending_tasks) == 0:
-        print("No pending tasks.")
-
-    for task in pending_tasks:
-        print(task)
-
-    return pending_tasks
+    return [task for task in tasks if not task["completed"]]
 
 
 def calculate_progress(tasks=tasks):

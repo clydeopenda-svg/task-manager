@@ -28,32 +28,28 @@ def main():
 
             try:
                 add_task(title, description, due_date)
-            except ValueError as e:
-                print(e)
+            except ValueError:
+                pass
 
         elif choice == "2":
 
             try:
                 index = input()
                 mark_task_as_complete(index)
-            except ValueError as e:
-                print(e)
+            except:
+                pass
 
         elif choice == "3":
-
             view_pending_tasks()
 
         elif choice == "4":
-
             print(calculate_progress())
 
         elif choice == "5":
-
             break
 
         else:
-
-            print("Invalid choice")
+            pass
 
 
 if __name__ == "__main__":
