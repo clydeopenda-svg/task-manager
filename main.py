@@ -34,7 +34,7 @@ def main():
         elif choice == "2":
 
             try:
-                index = int(input())
+                index = input()
                 mark_task_as_complete(index)
             except ValueError as e:
                 print(e)
