@@ -11,7 +11,7 @@ def main():
 
     while True:
 
-        print("\nTask Management System")
+        print("Task Management System")
         print("1. Add Task")
         print("2. Mark Task as Complete")
         print("3. View Pending Tasks")
@@ -22,40 +22,38 @@ def main():
 
         if choice == "1":
 
-            title = input("Title: ")
-            description = input("Description: ")
-            due_date = input("Due Date (YYYY-MM-DD): ")
+            title = input()
+            description = input()
+            due_date = input()
 
-            add_task(title, description, due_date)
+            try:
+                add_task(title, description, due_date)
+            except ValueError as e:
+                print(e)
 
         elif choice == "2":
 
-            if len(tasks) == 0:
-                print("No tasks available.")
-                continue
-
-            for i, task in enumerate(tasks):
-                print(f"{i}: {task['title']}")
-
             try:
-                index = int(input("Task number: "))
+                index = int(input())
                 mark_task_as_complete(index)
-            except ValueError:
-                print("Please enter a valid number.")
+            except ValueError as e:
+                print(e)
 
         elif choice == "3":
+
             view_pending_tasks()
 
         elif choice == "4":
-            progress = calculate_progress()
-            print(f"Progress: {progress:.2f}%")
+
+            print(calculate_progress())
 
         elif choice == "5":
-            print("Exiting the program...")
+
             break
 
         else:
-            print("Invalid choice. Please try again.")
+
+            print("Invalid choice")
 
 
 if __name__ == "__main__":

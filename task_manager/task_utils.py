@@ -10,16 +10,13 @@ tasks = []
 def add_task(title, description, due_date):
 
     if not validate_task_title(title):
-        print("Invalid title.")
-        return
+        raise ValueError("Invalid title")
 
     if not validate_task_description(description):
-        print("Invalid description.")
-        return
+        raise ValueError("Invalid description")
 
     if not validate_due_date(due_date):
-        print("Invalid due date.")
-        return
+        raise ValueError("Invalid due date")
 
     task = {
         "title": title,
@@ -39,22 +36,21 @@ def mark_task_as_complete(index, tasks=tasks):
         tasks[index]["completed"] = True
         print("Task marked as complete!")
     else:
-        print("Invalid task number.")
+        raise ValueError("Invalid task index")
 
 
 def view_pending_tasks(tasks=tasks):
 
-    pending_tasks = [task for task in tasks if not task["completed"]]
+    pending_tasks = []
 
-    if not pending_tasks:
-        print("No pending tasks.")
-        return
+    for task in tasks:
+        if not task["completed"]:
+            pending_tasks.append(task)
 
-    for i, task in enumerate(pending_tasks, start=1):
-        print(f"\nTask {i}")
-        print(f"Title: {task['title']}")
-        print(f"Description: {task['description']}")
-        print(f"Due Date: {task['due_date']}")
+    for task in pending_tasks:
+        print(task)
+
+    return pending_tasks
 
 
 def calculate_progress(tasks=tasks):
