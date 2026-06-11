@@ -33,28 +33,30 @@ def mark_task_as_complete(index, tasks=tasks):
     if 0 <= index < len(tasks):
         tasks[index]["completed"] = True
         print("Task marked as complete!")
-    else:
-        return
 
 
 def view_pending_tasks(tasks=tasks):
 
-    for task in tasks:
-        if not task["completed"]:
-            print(task)
+    pending = [t for t in tasks if not t["completed"]]
 
-    return [task for task in tasks if not task["completed"]]
+    for task in pending:
+        print(task)
+
+    return pending
 
 
 def calculate_progress(tasks=tasks):
 
     if len(tasks) == 0:
+        print("0.00%")
         return 0
 
     completed = 0
-
     for task in tasks:
         if task["completed"]:
             completed += 1
 
-    return (completed / len(tasks)) * 100
+    progress = (completed / len(tasks)) * 100
+
+    print(f"{progress:.2f}%")
+    return progress
